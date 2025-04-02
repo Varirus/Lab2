@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab2MAUIApp.MainPage">
+
+    <Grid ColumnSpacing="15" Padding="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Frame Grid.Column="0"
+               BorderColor="LightGray" 
+               CornerRadius="10" 
+               Padding="15"
+               VerticalOptions="Start">
+            <VerticalStackLayout Spacing="10" MaximumHeightRequest="1000">
+                <Label Text="Add/Edit Game" FontSize="Medium" FontAttributes="Bold"/>
+                <Entry x:Name="idEntry" Placeholder="ID" Keyboard="Numeric"/>
+                <Entry x:Name="titleEntry" Placeholder="Title"/>
+                <Entry x:Name="descEntry" Placeholder="Description"/>
+                <Entry x:Name="genreEntry" Placeholder="Genre"/>
+                <Entry x:Name="platformEntry" Placeholder="Platform"/>
+                <Entry x:Name="developerEntry" Placeholder="Developer"/>
+                <Entry x:Name="dateEntry" Placeholder="Release Date"/>
+                <Button x:Name="SaveButton" Text="Save" Clicked="OnSaveClicked"/>
+                <Label Text="Sorting Actions" FontSize="Medium" FontAttributes="Bold"/>
+                <Button x:Name="SortOrderButton" Text="Sort Ascending" Clicked="OnSortOrderClicked"/>
+                <Button x:Name="SortByIDButton" Text="Sort By ID" Clicked="OnSortByIDClicked"/>
+                <Button x:Name="SortByTitleButton" Text="Sort By Title" Clicked="OnSortByTitleClicked"/>
+                <Button x:Name="SortByPlatformButton" Text="Sort By Platform" Clicked="OnSortByPlatformClicked"/>
+                <Label Text="Other Actions" FontSize="Medium" FontAttributes="Bold"/>
+                <Button x:Name="DownloadFromAPIButton" Text="Download From API" Clicked="OnDownloadFromAPIClicked"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <ScrollView Grid.Column="1"
+               >
+            <VerticalStackLayout Spacing="10" CascadeInputTransparent="False" IsEnabled="True">
+                <Label Text="Game List" FontSize="Medium" FontAttributes="Bold"/>
+
+                <ListView x:Name="GamesListView" 
+                          CachingStrategy="RecycleElement,RecycleElementAndDataTemplate"
+                          HasUnevenRows="True"
+                          VerticalOptions="FillAndExpand"
+                          MaximumHeightRequest="1000">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame BorderColor="LightGray" CornerRadius="5" Padding="10">
+                                    <Grid RowSpacing="5" ColumnSpacing="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Row="0" Grid.Column="0" Text="ID:" FontAttributes="Bold"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding id}"/>
+
+                                        <Label Grid.Row="0" Grid.Column="2" Text="Title:" FontAttributes="Bold"/>
+                                        <Label Grid.Row="0" Grid.Column="3" Text="{Binding title}"/>
+
+                                        <Label Grid.Row="1" Grid.Column="0" Text="Genre:" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding genre}"/>
+
+                                        <Label Grid.Row="1" Grid.Column="2" Text="Platform:" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" Grid.Column="3" Text="{Binding platform}"/>
+
+                                        <Label Grid.Row="2" Grid.Column="0" Text="Developer:" FontAttributes="Bold"/>
+                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding developer}"/>
+
+                                        <Label Grid.Row="2" Grid.Column="2" Text="Release Date:" FontAttributes="Bold"/>
+                                        <Label Grid.Row="2" Grid.Column="3" Text="{Binding release_date}"/>
+
+
+                                        <Label Grid.Row="3" Grid.ColumnSpan="4" Text="{Binding short_description}" FontSize="Small"/>
+
+                                        <StackLayout Grid.Row="4" Grid.ColumnSpan="4" 
+                                                     Orientation="Horizontal" Spacing="10">
+                                            <Button Text="Edit" 
+                                                    Clicked="OnEditClicked" 
+                                                    CommandParameter="{Binding .}"
+                                                    BackgroundColor="LightBlue"
+                                                    WidthRequest="80"/>
+                                            <Button Text="Delete" 
+                                                    Clicked="OnDeleteClicked" 
+                                                    CommandParameter="{Binding .}"
+                                                    BackgroundColor="LightCoral"
+                                                    WidthRequest="80"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
