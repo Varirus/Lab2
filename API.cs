@@ -9,14 +9,14 @@ namespace Lab2
 {
     class API
     {
-        public List<Game>? games;
-        public HttpClient? client;
+        internal List<Game>? gameList;
+        internal HttpClient? client;
         public async Task download()
         {
             client = new HttpClient();
             string call = "https://www.freetogame.com/api/games";
             string response = await client.GetStringAsync(call);
-            games = JsonSerializer.Deserialize<List<Game>>(response);
+            gameList = JsonSerializer.Deserialize<List<Game>>(response);
         }
     }
 }
